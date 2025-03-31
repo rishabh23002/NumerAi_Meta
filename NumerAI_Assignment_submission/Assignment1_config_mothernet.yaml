@@ -1,0 +1,66 @@
+User: MTL_Assignment1
+Experiment_Name: MotherNet_MSE_600
+
+Seed: 5943728
+
+Dataset: {
+  name: "v5.0",
+  set: "small", # small, medium, all
+  v5.0 : {
+    files_to_download: [
+      'v5.0/features.json', 
+      'v5.0/live.parquet', 
+      'v5.0/live_benchmark_models.parquet', 
+      'v5.0/live_example_preds.csv', 
+      'v5.0/live_example_preds.parquet', 
+      'v5.0/train.parquet', 
+      'v5.0/train_benchmark_models.parquet', 
+      'v5.0/validation.parquet', 
+      'v5.0/validation_benchmark_models.parquet', 
+      'v5.0/validation_example_preds.csv', 
+      'v5.0/validation_example_preds.parquet'
+    ],
+    # reduce_dataset_size: 16,
+  }
+}
+
+Model: {
+  name: "MotherNet",
+  LGBMRegressor: {
+    n_estimators: 2000,
+    learning_rate: 0.01,
+    max_depth: 5,
+    num_leaves: 31,
+    colsample_bytree: 0.1
+  },
+  MLP: {
+    dims: [42,128,64,10],
+    task: regression,
+  }
+}
+
+Criterion: {
+  name: "",
+}
+
+Optimizer: {
+  name: "",
+}
+
+Train: {
+  gpu_id: 0,
+  last_train_era: -1,
+  batch_size: 1024,
+  shuffle: True,
+  drop_last: True,
+}
+
+Validation: {
+  batch_size: 1024,
+  shuffle: True,
+  drop_last: False,
+}
+
+Evaluation: {
+
+}
